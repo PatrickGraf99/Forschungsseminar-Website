@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <title>Data Explorer</title>
+    <style>
+        .request {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+        }
+        .request input[type="number"] {
+            padding: 5px;
+            font-size: 1rem;
+        }
+        .request button {
+            padding: 5px 10px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        * {
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+<div class="root">
+    <div class="request">
+        <input type="number" id="data-id" placeholder="Enter ID" />
+        <button id="view-data">View Data</button>
+    </div>
+    <div class="content">
+        <!-- Server response will be displayed here -->
+    </div>
+</div>
+<script>
+    const url = 'http://152.53.125.233:6969/read-data'; // update with your server URL
+
+    document.getElementById('view-data').addEventListener('click', async () => {
+        const idInput = document.getElementById('data-id');
+        const contentDiv = document.querySelector('.content');
+        const idValue = idInput.value;
+
+        if(!idValue) {
+            contentDiv.innerText = 'Please enter an ID.';
+            return;
+        }
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'username': 'Forschungsseminar',
+                    'password': 'tV04rKqF0REtpsjqK7BZ',
+                },
+                body: JSON.stringify({ "id": Number(idValue) })
+            });
+
+            console.log('Server responded with: ' + response.status);
+
+            // Attempt to parse response as JSON
+            let data;
+            try {
+                data = await response.json();
+                contentDiv.innerText = JSON.stringify(data, null, 2);
+            } catch(e) {
+                // If response is not JSON, show text
+                data = await response.text();
+                contentDiv.innerText = data;
+            }
+        } catch (error) {
+            console.error(error);
+            contentDiv.innerText = 'Error: ' + error.message;
+        }
+    });
+</script>
+</body>
+</html>
