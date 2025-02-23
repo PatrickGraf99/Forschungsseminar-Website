@@ -2,6 +2,7 @@
 
 
 const express = require('express')
+const cors = require('cors')
 const fs = require('fs').promises
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -14,6 +15,8 @@ const password = "tV04rKqF0REtpsjqK7BZ"
 
 const app = express()
 const port = process.env.PORT || 6969
+
+app.use(cors())
 
 app.get('/online', (req, res) => {
     res.status(200).send('Server is running')
