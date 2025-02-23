@@ -82,11 +82,14 @@ app.post('/read-data', jsonParser, async (req, res) => {
     try {
         let data = await fs.readFile(file, "utf-8")
         res.status(200).send(data)
+        return
     } catch (err) {
         if (err.code === 'ENOENT') {
             res.status(404).send('The file you are looking for was not found')
-        }
+            return
+        } else {
         res.status(500).send('Internal Server Error')
+        }
     }
 })
 
