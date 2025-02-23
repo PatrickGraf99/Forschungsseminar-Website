@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+    <title>Experiment</title>
+</head>
+<body>
+<div class="root">
+    <div class="settings">
+        <div class="selection">
+            <div class="option">
+                <input type="radio" id="dark-mode" onclick="setDarkMode()" name="theme" value="dark_mode">
+                <label for="dark-mode">Dark Mode</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="dark-env" name="environment" value="dark_env">
+                <label for="dark-env">Dark Environment</label>
+            </div>
+        </div>
+
+        <div class="selection">
+            <div class="option">
+
+                <input type="radio" id="light-mode" onclick="setLightMode()" name="theme" value="light_mode">
+                <label for="light-mode">Light Mode</label>
+            </div>
+            <div class="option">
+                <input type="radio" id="light-env" name="environment" value="light_env">
+                <label for="light-env">Light Environment</label>
+            </div>
+        </div>
+
+        <input type="number" id="part-id" name="partID" placeholder="">
+        <label id="id-label" for="part-id">Teilnehmer-ID</label>
+        <button type="button" id="btn-start" onclick="readSettings()">Experiment starten</button>
+
+    </div>
+    <div class="content">
+        <!-- Should be about 3852 chars -->
+    </div>
+</div>
+</body>
+<script src="scripts.js" language="JavaScript"></script>
+<script>
+</script>
+</html>

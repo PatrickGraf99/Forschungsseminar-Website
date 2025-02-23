@@ -1,0 +1,94 @@
+:root {
+    --font: "Roboto Mono", sans-serif;
+    --dark-text-color: #23233d;
+    --light-text-color: #f0f0f0;
+    --light-background-color: #f0f0f0;
+    --dark-bakground-color: #23233d;
+    --dark-accent-color: #0f0f1f;
+}
+
+* {
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--dark-bakground-color);
+    padding: 22px;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.root {
+    height: 100%;
+    width: 100%;
+}
+
+.content {
+    text-align: justify;
+    padding: 5px;
+    height: 100%;
+    width: 100%;
+    font: 2rem var(--font);
+    color: var(--light-text-color);
+    background-color: var(--dark-bakground-color);
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 50%;
+    height: 40%;
+    background-color: var(--dark-accent-color);
+    color: var(--light-text-color);
+    border: 1px solid var(--light-text-color);
+    border-radius: 15px;
+    position: absolute;
+    left: 25%;
+    top: 35%;
+    font: 2rem "Roboto Mono", sans-serif;
+}
+.selection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selection .option {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+input[type="radio"] {
+    height: 2rem;
+    width: 2rem;
+}
+
+label {
+    display: inline-block;
+}
+
+
+#btn-start {
+    font: 2rem "Roboto Mono", sans-serif;
+    margin-top: 40px;
+    width: 80%;
+    height: 30%;
+    align-self: center;
+    cursor: pointer;
+}
+
+input[type="number"] {
+    margin-top: 20px;
+    font: 2rem "Roboto Mono", sans-serif;
+}
+
+#id-label {
+    font: 1rem "Roboto Mono", sans-serif;
+}
+
+.hidden {
+    display: none;
+}
