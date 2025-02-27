@@ -53,6 +53,7 @@ let fillScreenRandomly = function () {
         //console.log("Same random number rolled, rerolling...")
         random_choice = Math.floor(Math.random() * filler_outlier_list.length)
     }
+    random_choice = 1
     // Save last_choice to avoid duplicates in next generation
     last_choice = random_choice
     let chosen_pair = filler_outlier_list[random_choice]
