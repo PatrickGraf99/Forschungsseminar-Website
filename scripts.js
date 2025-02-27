@@ -6,7 +6,7 @@ let filler_outlier_list = [{"o": "e"}, {"e": "o"}, {"0": "8"}, {"8": "0"}, {"v":
 
 //currently saved times
 let times = []
-
+let pairs = []
 //last time that a spacebar press was registered
 let lastRecordedTime = 0
 
@@ -61,12 +61,12 @@ let fillScreenRandomly = function () {
     let filler = Object.keys(chosen_pair)[0]
     //...and use its value as the outlier
     let outlier = chosen_pair[filler]
-
+    pairs.push(chosen_pair)
     //Finally call the fillscreen method
     fillScreen(filler, outlier)
 }
 
-/**
+/*
  * Reads the settings from the starting dialogue, returns if no ui mode or env mode is selected or if no participant id
  * can be read
  */
@@ -155,6 +155,7 @@ function showSettings() {
 let startExperiment = function (mode, partID) {
     console.log("Starting experiment for selection " + mode + " ...")
     times = []
+    pairs = []
     lastRecordedTime = Date.now()
     // Add keydown detection to spacebar
     document.addEventListener("keydown", handleKeyPress )
@@ -198,7 +199,7 @@ let saveData = async function (mode, partID) {
             },
             body: JSON.stringify({
                 "message": {
-                    "id": partID, "times": times, "mode": mode }
+                    "id": partID, "times": times, "pairs": pairs, "mode": mode }
                 })
             }).then((res) => {
                 console.log('Server responded with: ' + res.status)
