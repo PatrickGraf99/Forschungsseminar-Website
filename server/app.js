@@ -38,22 +38,19 @@ app.post('/write-data', jsonParser, async (req, res) => {
     try {
         //console.log(username, password)
         let message = req.body.message
-        let partId = message['id']
-        //console.log('id: ' + partId)
-        let times = message['times']
-        //console.log('times: ' + times)
-        let mode = message['mode']
-        //console.log('mode: ' + mode)
-        let file = path.resolve(`../data/part${partId}.json`)
-        let json = {}
+        let partId = req.body.id
+
+        let file = path.resolve(`../data/part${partId}.csv`)
+        let content = ""
         try {
             let data = await fs.readFile(file, "utf-8")
-            json = JSON.parse(data)
+            content = data.toString()
         } catch (err) {
-            console.log('File was not found or does not contain json, using new json isntead')
+            console.log('File was not found, creating new CSV file')
+            content = 'participant_id,timestamp,time_to_finish,ui_mode,environment,fill_character,outlier_character,trial\n'
         }
-        json[mode] = times
-        await fs.writeFile(file, JSON.stringify(json, null, 2))
+        content = content + message + '\n'
+        await fs.writeFile(file, content, 'utf8')
         console.log('Wrote data to file')
         res.status(200).send('Successfully written data to file')
     } catch (error) {

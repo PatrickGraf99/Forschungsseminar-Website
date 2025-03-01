@@ -1,12 +1,20 @@
 const NUM_OF_CHARS = 2352 //Works for: Win11, Firefox Browser - fullscreen, 1920x1080, 100% scale
 let last_choice = Math.infinity
 
-let filler_outlier_list = [{"o": "e"}, {"e": "o"}, {"0": "8"}, {"8": "0"}, {"v": "u"},
-    {"u": "v"}, {"T": "7"}, {"7": "T"},]
+let filler_outlier_list = [{"o": "e"}, {"0": "8"}, {"v": "u"},
+    {"T": "7"}, {"e": "o"}, {"8": "0"}, {"u": "v"}, {"7": "T"},]
 
-//currently saved times
-let times = []
-let pairs = []
+// saved states for converting to csv
+let currentPair = {}
+let currentFiller = ""
+let currentOutlier = ""
+let currentPairIndex = 0
+let currentParticipantID = NaN
+let currentTrial = NaN
+let currentMode = null
+let currentEnvironment = null
+
+
 //last time that a spacebar press was registered
 let lastRecordedTime = 0
 
@@ -48,23 +56,19 @@ let fillScreen = function (filler, outlier) {
  * random number is chosen again, a new one is created
  */
 let fillScreenRandomly = function () {
-    let random_choice = Math.floor(Math.random() * filler_outlier_list.length)
-    while (random_choice === last_choice) {
-        //console.log("Same random number rolled, rerolling...")
-        random_choice = Math.floor(Math.random() * filler_outlier_list.length)
+    if (currentPairIndex >= filler_outlier_list.length) {
+        currentPairIndex = 0
     }
-    random_choice = 1
-    // Save last_choice to avoid duplicates in next generation
-    last_choice = random_choice
-    let chosen_pair = filler_outlier_list[random_choice]
 
+    // Save last_choice to avoid duplicates in next generation
+    currentPair = filler_outlier_list[currentPairIndex]
+    currentPairIndex += 1
     //Get the key as the filler...
-    let filler = Object.keys(chosen_pair)[0]
+    currentFiller = Object.keys(currentPair)[0]
     //...and use its value as the outlier
-    let outlier = chosen_pair[filler]
-    pairs.push(chosen_pair)
+    currentOutlier = currentPair[currentFiller]
     //Finally call the fillscreen method
-    fillScreen(filler, outlier)
+    fillScreen(currentFiller, currentOutlier)
 }
 
 /*
@@ -97,7 +101,7 @@ let readSettings = function () {
 
     let ui = rbtnDarkMode.checked ? "dark_mode" : "light_mode"
     let env = rbtnDarkEnv.checked ? "dark_env" : "light_env"
-    let mode = ui + "_" + env
+    let mode = [ui, env]
     //Change ui mode depending on the selected button
     //Mode change now directly bound to button onclicks
     /*if (rbtnDarkMode.checked) {
@@ -155,16 +159,16 @@ function showSettings() {
  */
 let startExperiment = function (mode, partID) {
     console.log("Starting experiment for selection " + mode + " ...")
-    times = []
-    pairs = []
+    currentPairIndex = 0
+    currentMode = mode[0]
+    currentEnvironment = mode[1]
+    currentTrial = 1
+    currentParticipantID = partID
     lastRecordedTime = Date.now()
     // Add keydown detection to spacebar
     document.addEventListener("keydown", handleKeyPress )
     hideSettings()
     fillScreenRandomly()
-    setTimeout(() => {
-        endExperiment(mode, partID);
-    }, EXPERIMENT_TIME)
 }
 
 /**
@@ -174,21 +178,19 @@ let startExperiment = function (mode, partID) {
  * @param partID
  * @returns {Promise<void>}
  */
-let endExperiment = async function (mode, partID) {
-    await saveData(mode, partID)
+let endExperiment = async function () {
     showSettings()
     document.removeEventListener("keydown", handleKeyPress);
     document.querySelector(".content").innerHTML = ''
-    console.log(times)
+
 }
 
 /**
  * Simple fetch that posts data to our Server
- * @param mode
- * @param partID
  * @returns {Promise<void>}
+ * @param data
  */
-let saveData = async function (mode, partID) {
+let saveData = async function (data) {
     const url = 'http://152.53.125.233:6969/write-data'
     try {
         const response = await fetch(url, {
@@ -199,9 +201,7 @@ let saveData = async function (mode, partID) {
                 'password': 'tV04rKqF0REtpsjqK7BZ',
             },
             body: JSON.stringify({
-                "message": {
-                    "id": partID, "times": times, "pairs": pairs, "mode": mode }
-                })
+                "message": data, "id": currentParticipantID})
             }).then((res) => {
                 console.log('Server responded with: ' + res.status)
         })
@@ -216,13 +216,23 @@ let handleKeyPress = function (event) {
     }
 }
 
-let onSpacePressed = function () {
+let onSpacePressed = async function () {
     console.log('Space was pressed')
-    let currentTime = Date.now()
-    let timeDifference = currentTime - lastRecordedTime
-    lastRecordedTime = currentTime
-    times.push(timeDifference)
-    fillScreenRandomly()
+    let timestamp = Date.now()
+    let timeToFinish = timestamp - lastRecordedTime
+    lastRecordedTime = timestamp
+    let data = currentParticipantID + "," + timestamp + "," + timeToFinish + "," + currentMode + "," +
+        currentEnvironment + "," + currentFiller + "," + currentOutlier + "," +  currentTrial
+    console.log(data)
+    localStorage.setItem(timestamp+"", data)
+    await saveData(data)
+    currentTrial += 1
+    if (currentTrial > 5) {
+        endExperiment()
+    } else {
+        fillScreenRandomly()
+    }
+
 }
 
 
