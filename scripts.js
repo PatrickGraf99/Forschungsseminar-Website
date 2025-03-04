@@ -180,8 +180,8 @@ let startExperiment = function (mode, partID) {
  * @returns {Promise<void>}
  */
 let endExperiment = async function () {
-    if (currentTrialCombined > 3 * TRIALS) {
-        currentTrialCombined = 0;
+    if (currentTrialCombined > 3 * TRIALS + 1) {
+        currentTrialCombined = 1;
     }
     console.log(localStorage.getItem(currentParticipantID))
     showSettings()
