@@ -183,6 +183,7 @@ let endExperiment = async function () {
     if (currentTrialCombined > 3 * TRIALS) {
         currentTrialCombined = 0;
     }
+    console.log(localStorage.getItem(currentParticipantID))
     showSettings()
     document.removeEventListener("keydown", handleKeyPress);
     document.querySelector(".content").innerHTML = ''
@@ -220,15 +221,23 @@ let handleKeyPress = function (event) {
     }
 }
 
+function storeLocally(data) {
+    let existingData = localStorage.getItem(currentParticipantID)
+    if (!existingData || existingData === '') {
+        existingData = 'participant_id,timestamp,time_to_finish,ui_mode,environment,fill_character,outlier_character,trial,trial_combined\n'
+    }
+    existingData = existingData+data+'\n'
+    localStorage.setItem(currentParticipantID, existingData)
+}
+
 let onSpacePressed = async function () {
-    console.log('Space was pressed')
     let timestamp = Date.now()
     let timeToFinish = timestamp - lastRecordedTime
     lastRecordedTime = timestamp
     let data = currentParticipantID + "," + timestamp + "," + timeToFinish + "," + currentMode + "," +
         currentEnvironment + "," + currentFiller + "," + currentOutlier + "," +  currentTrial + "," + currentTrialCombined
     console.log(data)
-    localStorage.setItem(timestamp+"", data)
+    storeLocally(data)
     await saveData(data)
     currentTrial += 1
     currentTrialCombined += 1
