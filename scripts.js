@@ -11,6 +11,7 @@ let currentOutlier = ""
 let currentPairIndex = 0
 let currentParticipantID = NaN
 let currentTrial = NaN
+let currentTrialCombined = 1
 let currentMode = null
 let currentEnvironment = null
 
@@ -27,7 +28,7 @@ const colors = {
 }
 
 //Experiment time in milliseconds
-const EXPERIMENT_TIME = 1000 * 10
+const TRIALS = 5
 
 
 /**
@@ -179,6 +180,9 @@ let startExperiment = function (mode, partID) {
  * @returns {Promise<void>}
  */
 let endExperiment = async function () {
+    if (currentTrialCombined > 3 * TRIALS) {
+        currentTrialCombined = 0;
+    }
     showSettings()
     document.removeEventListener("keydown", handleKeyPress);
     document.querySelector(".content").innerHTML = ''
@@ -222,12 +226,13 @@ let onSpacePressed = async function () {
     let timeToFinish = timestamp - lastRecordedTime
     lastRecordedTime = timestamp
     let data = currentParticipantID + "," + timestamp + "," + timeToFinish + "," + currentMode + "," +
-        currentEnvironment + "," + currentFiller + "," + currentOutlier + "," +  currentTrial
+        currentEnvironment + "," + currentFiller + "," + currentOutlier + "," +  currentTrial + "," + currentTrialCombined
     console.log(data)
     localStorage.setItem(timestamp+"", data)
     await saveData(data)
     currentTrial += 1
-    if (currentTrial > 5) {
+    currentTrialCombined += 1
+    if (currentTrial > TRIALS) {
         endExperiment()
     } else {
         fillScreenRandomly()

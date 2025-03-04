@@ -47,7 +47,7 @@ app.post('/write-data', jsonParser, async (req, res) => {
             content = data.toString()
         } catch (err) {
             console.log('File was not found, creating new CSV file')
-            content = 'participant_id,timestamp,time_to_finish,ui_mode,environment,fill_character,outlier_character,trial\n'
+            content = 'participant_id,timestamp,time_to_finish,ui_mode,environment,fill_character,outlier_character,trial,trial_combined\n'
         }
         content = content + message + '\n'
         await fs.writeFile(file, content, 'utf8')
