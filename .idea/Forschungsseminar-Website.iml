@@ -7,7 +7,11 @@
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 3.13 (Forschungsseminar-Website)" jdkType="Python SDK" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.12 (Forschungsseminar-Website)" jdkType="Python SDK" />
+>>>>>>> d6bf36ba4ad2188d30d41472724fd0cab5f7136d
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
