@@ -1,0 +1,61 @@
+Recording,Participant,TOI,Interval,Duration_of_interval,Average_pupil_diameter.Webpage,Number_of_blinks,Blink_latency,Average_duration_of_blinks
+Recording3,P3,DarkE_DarkM,1,496616,4.52003,75,14465,218
+Recording3,P3,DarkE_LightM,1,286346,3.38734,31,5000,178
+Recording3,P3,LightE_DarkM,1,418157,3.97811,27,4120,266
+Recording3,P3,LightE_LightM,1,251484,3.20179,23,5945,172
+Recording3,P3,Entire Recording,1,1778677,3.91123,226,3784,207
+Recording4,P4,DarkE_DarkM,1,538828,5.29254,159,2858,122
+Recording4,P4,DarkE_LightM,1,312153,3.61979,22,48384,172
+Recording4,P4,LightE_DarkM,1,493769,4.09674,60,1263,249
+Recording4,P4,LightE_LightM,1,276336,3.77869,44,4970,210
+Recording4,P4,Entire Recording,1,2081093,4.35934,350,305,171
+Recording5,P5,DarkE_DarkM,1,467704,5.13648,77,6830,149
+Recording5,P5,DarkE_LightM,1,259446,4.28865,52,1487,210
+Recording5,P5,LightE_DarkM,1,299357,3.41193,52,19568,241
+Recording5,P5,LightE_LightM,1,334045,3.262,69,4945,243
+Recording5,P5,Entire Recording,1,1997226,4.17243,407,7482,206
+Recording6,P6,DarkE_DarkM,1,399412,3.92511,44,13490,382
+Recording6,P6,DarkE_LightM,1,264136,3.26225,38,12623,342
+Recording6,P6,LightE_DarkM,1,348515,3.69136,42,635,448
+Recording6,P6,LightE_LightM,1,264665,2.74272,28,608,211
+Recording6,P6,Entire Recording,1,1781946,3.50333,239,3990,317
+Recording7,P7,DarkE_DarkM,1,277580,3.45823,26,26290,267
+Recording7,P7,DarkE_LightM,1,220141,2.49905,21,23938,269
+Recording7,P7,LightE_DarkM,1,312898,3.86539,25,5112,224
+Recording7,P7,LightE_LightM,1,194156,2.73426,24,5960,404
+Recording7,P7,Entire Recording,1,1353038,3.27304,186,2045,284
+Recording8,P8,DarkE_DarkM,1,418817,2.75901,85,3455,323
+Recording8,P8,DarkE_LightM,1,144194,2.52295,28,7742,317
+Recording8,P8,LightE_DarkM,1,217728,2.58987,42,4152,400
+Recording8,P8,LightE_LightM,1,298080,2.48068,45,4048,191
+Recording8,P8,Entire Recording,1,1488158,2.61151,269,369,301
+Recording9,P9,DarkE_DarkM,1,583469,3.76748,145,6118,229
+Recording9,P9,DarkE_LightM,1,341425,2.7653,83,128,226
+Recording9,P9,LightE_DarkM,1,795365,3.1538,191,2863,234
+Recording9,P9,LightE_LightM,1,466126,2.66097,114,2322,237
+Recording9,P9,Entire Recording,1,2523581,3.17196,650,1903,233
+Recording10,P10,DarkE_DarkM,1,405907,3.923,178,1580,251
+Recording10,P10,DarkE_LightM,1,336792,3.35262,147,835,237
+Recording10,P10,LightE_DarkM,1,533650,3.39553,267,22,268
+Recording10,P10,LightE_LightM,1,296027,2.89288,110,563,243
+Recording10,P10,Entire Recording,1,2129235,3.42936,919,324,262
+Recording11,P11,DarkE_DarkM,1,216644,4.07965,17,15773,144
+Recording11,P11,DarkE_LightM,1,151954,2.90749,9,3387,160
+Recording11,P11,LightE_DarkM,1,325059,3.90431,19,25800,130
+Recording11,P11,LightE_LightM,1,188924,2.87278,9,1417,151
+Recording11,P11,Entire Recording,1,1171588,3.56921,116,1039,159
+Recording12,P12,DarkE_DarkM,1,406545,4.17166,0,,
+Recording12,P12,DarkE_LightM,1,197854,3.23685,0,,
+Recording12,P12,LightE_DarkM,1,289724,3.8111,0,,
+Recording12,P12,LightE_LightM,1,233691,3.47258,0,,
+Recording12,P12,Entire Recording,1,1511104,3.76599,0,,
+Recording13,P13,DarkE_DarkM,1,495167,3.70949,67,6133,218
+Recording13,P13,DarkE_LightM,1,366618,2.80263,37,24375,237
+Recording13,P13,LightE_DarkM,1,652491,3.53661,70,1683,226
+Recording13,P13,LightE_LightM,1,326448,2.88108,37,52,208
+Recording13,P13,Entire Recording,1,2195382,3.33334,296,988,221
+Recording14,P14,DarkE_DarkM,1,393501,3.74227,162,287,185
+Recording14,P14,DarkE_LightM,1,209687,3.59038,55,4112,159
+Recording14,P14,LightE_DarkM,1,263319,3.97155,69,3625,181
+Recording14,P14,LightE_LightM,1,144720,3.24692,58,1417,196
+Recording14,P14,Entire Recording,1,1417700,3.77338,476,1051,188
